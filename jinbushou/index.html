@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>紧部首 - 汉字偏旁部首快速查询与组字工具</title>
+    <meta name="description" content="紧部首是一个专业的汉字偏旁部首查询工具，支持按紧部首（紧接部首）检索汉字，提供部首拆解、笔画数计算及常用组字示例，帮助快速掌握汉字结构与书写规律。">
+    <meta name="keywords" content="紧部首,汉字部首查询,汉字结构,偏旁部首,组字工具,部首拆解">
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #e67e22;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-secondary: #666666;
+            --border-color: #e1e4e8;
+            --spacing-unit: 1rem;
+            --radius-md: 8px;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Layout Utilities */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        .section {
+            padding: 3rem 0;
+        }
+
+        /* Header & Nav */
+        header {
+            background: var(--card-bg);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Search & Input Area */
+        .search-container {
+            background: white;
+            padding: 0.5rem;
+            border-radius: 50px;
+            display: inline-flex;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            outline: none;
+        }
+
+        .search-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .search-btn:hover {
+            background-color: #d35400;
+        }
+
+        /* Content Grid */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .header-inner {
+                flex-direction: column;
+                height: auto;
+                padding: 1rem 0;
+                gap: 1rem;
+            }
+        }
+
+        /* Sidebar Styles */
+        .sidebar-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .radical-list {
+            list-style: none;
+        }
+
+        .radical-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .radical-list li:last-child {
+            border-bottom: none;
+        }
+
+        .radical-list li:hover {
+            background-color: #f9f9f9;
+            color: var(--accent-color);
+        }
+
+        .radical-item {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .radical-char {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .radical-count {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Main Content */
+        .result-area {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            min-height: 400px;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: var(--text-secondary);
+            padding: 3rem 0;
+        }
+
+        .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .character-card {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            margin-bottom: 1rem;
+            transition: box-shadow 0.2s;
+        }
+
+        .character-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .char-display {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f4f6f8;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .char-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .char-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .detail-item {
+            background: #f8f9fa;
+            padding: 0.8rem;
+            border-radius: 6px;
+        }
+
+        .detail-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .radical-tag {
+            display: inline-block;
+            background: #fff3e0;
+            color: #e65100;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        .stroke-path {
+            font-family: "KaiTi", "楷体", serif;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+        }
+
+        /* Section Titles */
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-col a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+
+        .footer-col a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-inner">
+            <a href="#" class="logo">紧<span>部首</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#search-section">查询</a></li>
+                    <li><a href="#guide">使用指南</a></li>
+                    <li><a href="#about">关于我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="search-section">
+        <div class="container">
+            <h1>紧部首查询工具</h1>
+            <p>精准定位汉字结构，快速掌握部首归属，支持笔画数统计与组字分析。</p>
+            
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="输入汉字或部首名称（例如：紧、部、提）..." autocomplete="off">
+                <button class="search-btn" onclick="performSearch()">查询</button>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="grid-layout">
+            <!-- Sidebar Navigation -->
+            <aside>
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">热门部首</h3>
+                    <ul class="radical-list" id="radicalList">
+                        <!-- Populated by JS -->
+                    </ul>
+                </div>
+
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">使用提示</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                        “紧部首”是指汉字结构中紧接在主体结构或偏旁之后的笔画或部件。本工具专注于帮助用户快速识别汉字的偏旁部首属性，适用于书法学习、汉字教学及字典检索辅助。
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <section class="result-area" id="resultArea">
+                <div class="empty-state">
+                    <span class="empty-icon">🔍</span>
+                    <h3>等待输入</h3>
+                    <p>请在上方搜索框输入汉字，或点击左侧列表查看常用部首。</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Guide Section -->
+        <section class="section" id="guide">
+            <div class="section-header">
+                <h2>什么是“紧部首”？</h2>
+                <p>理解汉字结构的核心概念</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <article style="background: white; padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                    <h3 style="margin-bottom: 0.5rem; color: var(--primary-color);">结构定位</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                        在汉字结构分析中，紧部首通常指代紧接在主体部件之后的部首。例如在“紧”字中，上部是“糸”，下部是“堇”，下部即为紧部首。
+                    </p>
+                </article>
+                <article style="background: white; padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                    <h3 style="margin-bottom: 0.5rem; color: var(--primary-color);">部首分类</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                        紧部首常用于字典检索。了解一个字的紧部首有助于快速归入部首目录，查找同部首的其他汉字，从而推断其含义或读音。
+                    </p>
+                </article>
+                <article style="background: white; padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                    <h3 style="margin-bottom: 0.5rem; color: var(--primary-color);">书写规范</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                        在楷书书写中，紧部首往往决定了笔画的起笔位置和整体的重心。掌握紧部首的写法，是提升汉字书写美观度的关键。
+                    </p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer id="about">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>紧部首工具</h4>
+                    <p style="opacity: 0.8; font-size: 0.9rem; max-width: 300px;">
+                        致力于提供最准确的汉字结构分析与部首查询服务，助力汉字文化传承与学习。
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="#">首页</a></li>
+                        <li><a href="#">部首查询</a></li>
+                        <li><a href="#">笔画查询</a></li>
+                        <li><a href="#">常用字表</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>联系我们</h4>
+                    <ul>
+                        <li>support@jinbushou.com</li>
+                        <li>客服时间：9:00 - 18:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 紧部首查询网. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mock Data for Radicals
+        const radicals = [
+            { char: "木", name: "木字旁", count: 1205 },
+            { char: "氵", name: "三点水", count: 890 },
+            { char: "火", name: "火字旁", count: 540 },
+            { char: "辶", name: "走之底", count: 320 },
+            { char: "扌", name: "提手旁", count: 890 },
+            { char: "讠", name: "言字旁", count: 450 },
+            { char: "女", name: "女字旁", count: 210 },
+            { char: "口", name: "口字旁", count: 670 },
+            { char: "纟", name: "绞丝旁", count: 330 },
+            { char: "王", name: "王字旁", count: 150 }
+        ];
+
+        // Mock Data for Search Results
+        const mockResults = {
+            "紧": {
+                radical: "堇",
+                strokes: "13",
+                meaning: "紧密，合拢，不松开",
+                examples: ["紧缩", "紧凑", "紧张", "紧握"]
+            },
+            "提": {
+                radical: "扌",
+                strokes: "12",
+                meaning: "向上举，举起",
+                examples: ["提出", "提醒", "提纲", "提手"]
+            },
+            "部": {
+                radical: "阝",
+                strokes: "10",
+                meaning: "总管，部分，机关组织",
+                examples: ["部门", "部队", "部首", "部署"]
+            },
+            "部首": {
+                radical: "首",
+                strokes: "9",
+                meaning: "汉字的部首",
+                examples: ["部首表", "查部首", "偏旁部首"]
+            }
+        };
+
+        // Initialize Sidebar
+        function initSidebar() {
+            const list = document.getElementById('radicalList');
+            radicals.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'radical-item';
+                li.innerHTML = `
+                    <span class="radical-char">${item.char}</span>
+                    <span class="radical-count">${item.count} 字</span>
+                `;
+                li.onclick = () => {
+                    document.getElementById('searchInput').value = item.char;
+                    performSearch();
+                };
+                list.appendChild(li);
+            });
+        }
+
+        // Perform Search Logic
+        function performSearch() {
+            const input = document.getElementById('searchInput');
+            const query = input.value.trim();
+            const resultArea = document.getElementById('resultArea');
+            
+            if (!query) {
+                resultArea.innerHTML = `
+                    <div class="empty-state">
+                        <span class="empty-icon">⚠️</span>
+                        <h3>请输入内容</h3>
+                        <p>请输入一个汉字或部首名称进行查询。</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Simulate processing
+            resultArea.innerHTML = '<div style="text-align:center; padding: 2rem;">正在查询...</div>';
+
+            setTimeout(() => {
+                // Check if we have specific data for the query
+                const data = mockResults[query];
+                
+                if (data) {
+                    // Render Result Card
+                    const cardHTML = `
+                        <div class="character-card">
+                            <div class="char-display">${query}</div>
+                            <div class="char-info">
+                                <h3>${query} <span class="radical-tag">紧部首：${data.radical}</span></h3>
+                                <p style="color: var(--text-secondary);">${data.meaning}</p>
+                                <div class="char-details">
+                                    <div class="detail-item">
+                                        <span class="detail-label">总笔画</span>
+                                        <span class="detail-value">${data.strokes} 画</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">紧部首笔画</span>
+                                        <span class="detail-value">${data.radical === '堇' ? '12' : data.radical === '扌' ? '3' : '2'} 画</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">结构类型</span>
+                                        <span class="detail-value">${query === '紧' ? '上下结构' : '左右结构'}</span>
+                                    </div>
+                                </div>
+                                <div class="stroke-path">
+                                    <strong>组字示例：</strong> ${data.examples.join('、')}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    resultArea.innerHTML = cardHTML;
+                } else {
+                    // Fallback for unknown characters
+                    resultArea.innerHTML = `
+                        <div class="empty-state">
+                            <span class="empty-icon">❓</span>
+                            <h3>未找到相关数据</h3>
+                            <p>该字不在演示数据库中，请尝试输入“紧”、“提”、“部”等常用字。</p>
+                        </div>
+                    `;
+                }
+            }, 300);
+        }
+
+        // Handle Enter key
+        document.getElementById('searchInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        // Initialize on load
+        window.onload = initSidebar;
+    </script>
+</body>
+</html>
