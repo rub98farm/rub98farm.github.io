@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="俄罗斯地图 - 专业的俄罗斯全境高清地图下载与在线浏览平台。提供行政区划、交通路线、地形地貌及城市分布等详细地理信息，满足科研、学习与出行规划需求。">
+    <meta name="keywords" content="俄罗斯地图,俄罗斯地图下载,高清地图,行政区划地图,俄罗斯地理信息">
+    <title>俄罗斯地图-高清全境地理信息与行政区划浏览</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-secondary: #666666;
+            --border-color: #e0e0e0;
+            --spacing-unit: 1rem;
+            --container-width: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Header & Nav */
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .header-inner {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        nav a.active {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+            padding: 4rem 1rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .search-box {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px 16px;
+            border-radius: 6px;
+            border: none;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-box button {
+            padding: 12px 24px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .search-box button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: var(--container-width);
+            margin: 2rem auto;
+            padding: 0 var(--spacing-unit);
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 2rem;
+        }
+
+        /* Map Section */
+        .map-section {
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .map-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .map-title h2 {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+        }
+
+        .map-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.875rem;
+            border: 1px solid var(--border-color);
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-sm:hover {
+            background: #f0f0f0;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 500px;
+            background-color: #eef2f5;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.1"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .map-placeholder-content {
+            text-align: center;
+            z-index: 2;
+        }
+
+        .map-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        /* Sidebar & Cards */
+        aside {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            padding: 1.5rem;
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+            color: var(--primary-color);
+        }
+
+        .region-list {
+            list-style: none;
+        }
+
+        .region-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .region-list a {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 10px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .region-list a:hover {
+            background-color: #f0f7ff;
+            color: var(--accent-color);
+        }
+
+        .region-list a span.count {
+            background: #eee;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        /* Info Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .info-item {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .info-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .info-item p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 3rem 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-col a {
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+
+        .footer-col a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85rem;
+            color: #95a5a6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                display: none; /* Simplified for mobile */
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+
+            .map-placeholder {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <div class="logo">
+            <span>🇷🇺</span> GeoRussia
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">首页</a></li>
+                <li><a href="#">高清地图</a></li>
+                <li><a href="#">行政区划</a></li>
+                <li><a href="#">交通路线</a></li>
+                <li><a href="#">下载中心</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>探索俄罗斯全境地理信息</h1>
+        <p>提供专业、权威的俄罗斯行政区划图、地形地貌图及交通路网图，助力您的科研、教学与出行规划。</p>
+        <div class="search-box">
+            <input type="text" placeholder="输入城市或区域名称，如：莫斯科、西伯利亚...">
+            <button type="button">搜索地图</button>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Main Content Area -->
+        <div class="main-content">
+            
+            <!-- Featured Map Section -->
+            <section class="map-section">
+                <div class="map-toolbar">
+                    <div class="map-title">
+                        <h2>俄罗斯全境标准地图</h2>
+                    </div>
+                    <div class="map-controls">
+                        <button class="btn-sm" onclick="alert('切换至行政区划模式')">行政区划</button>
+                        <button class="btn-sm" onclick="alert('切换至交通路网模式')">交通路网</button>
+                        <button class="btn-sm" onclick="alert('切换至卫星影像模式')">卫星影像</button>
+                        <button class="btn-sm" style="border-color: var(--accent-color); color: var(--accent-color);">下载高清图</button>
+                    </div>
+                </div>
+                
+                <div class="map-placeholder">
+                    <div class="map-placeholder-content">
+                        <div class="map-icon">🗺️</div>
+                        <h3>在线交互式地图预览</h3>
+                        <p style="color: #666; margin-top: 5px; margin-bottom: 15px;">支持缩放、拖拽与图层切换</p>
+                        <button class="btn-sm" style="background: var(--accent-color); color: white; border: none;">开始浏览</button>
+                    </div>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: #666; text-align: center;">
+                    * 此处为静态展示区域，实际网站将集成 SVG 或 Canvas 地图引擎以实现交互功能。
+                </p>
+            </section>
+
+            <!-- Information Grid -->
+            <section class="info-section">
+                <h2 style="margin-bottom: 1rem; font-size: 1.5rem; color: var(--primary-color);">主要地理数据概览</h2>
+                <div class="info-grid">
+                    <article class="info-item">
+                        <h4>国土总面积</h4>
+                        <p>约 1709.82 万平方公里，占地球陆地总面积的 11.9%，是世界上面积最大的国家。</p>
+                    </article>
+                    <article class="info-item">
+                        <h4>行政区划</h4>
+                        <p>俄罗斯联邦由 85 个联邦主体组成，包括 22 个共和国、9 个边疆区、46 个州等。</p>
+                    </article>
+                    <article class="info-item">
+                        <h4>地理跨度</h4>
+                        <p>横跨欧亚两大洲，东西最长约 9000 公里，南北最宽约 4000 公里，拥有极其多样的气候带。</p>
+                    </article>
+                    <article class="info-item">
+                        <h4>主要河流</h4>
+                        <p>伏尔加河（欧洲最长）、鄂毕河、叶尼塞河、勒拿河及阿穆尔河（黑龙江）等。</p>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Map Types / Categories -->
+            <section class="map-section" style="margin-top: 2rem;">
+                <div class="map-toolbar">
+                    <h2>地图资源分类</h2>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item" style="border-left-color: #27ae60; cursor: pointer;">
+                        <h4>政治与行政区划图</h4>
+                        <p>详细展示联邦主体边界、省会城市位置，适合政治学习与行政管理参考。</p>
+                    </div>
+                    <div class="info-item" style="border-left-color: #8e44ad; cursor: pointer;">
+                        <h4>地形地貌与土壤图</h4>
+                        <p>展示森林、草原、沙漠、冻土及山地分布，适合地理学与生态学研究。</p>
+                    </div>
+                    <div class="info-item" style="border-left-color: #e67e22; cursor: pointer;">
+                        <h4>交通与物流地图</h4>
+                        <p>包含铁路网、公路网、港口及航空线路，为物流运输与城市规划提供依据。</p>
+                    </div>
+                    <div class="info-item" style="border-left-color: #c0392b; cursor: pointer;">
+                        <h4>人口与城市分布图</h4>
+                        <p>展示人口密度、城市群分布及大中城市规模，适合社会学与人口学研究。</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Sidebar -->
+        <aside>
+            <!-- Regional Ranking -->
+            <div class="card">
+                <h3>热门区域地图</h3>
+                <ul class="region-list">
+                    <li><a href="#"><span>莫斯科市</span><span class="count">9,842</span></a></li>
+                    <li><a href="#"><span>圣彼得堡</span><span class="count">7,651</span></a></li>
+                    <li><a href="#"><span>克拉斯诺达尔</span><span class="count">5,210</span></a></li>
+                    <li><a href="#"><span>新西伯利亚</span><span class="count">4,890</span></a></li>
+                    <li><a href="#"><span>车里雅宾斯克</span><span class="count">4,102</span></a></li>
+                    <li><a href="#"><span>萨马拉</span><span class="count">3,876</span></a></li>
+                    <li><a href="#"><span>顿河畔罗斯托夫</span><span class="count">3,540</span></a></li>
+                </ul>
+            </div>
+
+            <!-- Download Guide -->
+            <div class="card">
+                <h3>下载指南</h3>
+                <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">本站提供多种分辨率的高清矢量图（SVG）和位图（JPG/PNG）下载。</p>
+                <ul class="region-list">
+                    <li><a href="#"><span>如何获取矢量图</span></a></li>
+                    <li><a href="#"><span>常用地图格式介绍</span></a></li>
+                    <li><a href="#"><span>教育机构授权申请</span></a></li>
+                </ul>
+            </div>
+
+            <!-- FAQ -->
+            <div class="card">
+                <h3>常见问题</h3>
+                <details style="margin-bottom: 0.5rem; cursor: pointer;">
+                    <summary style="font-size: 0.9rem; font-weight: 500;">地图数据来源是什么？</summary>
+                    <p style="font-size: 0.85rem; color: #666; margin-top: 5px;">数据基于俄罗斯联邦官方测绘局及公开地理信息数据库整合。</p>
+                </details>
+                <details style="margin-bottom: 0.5rem; cursor: pointer;">
+                    <summary style="font-size: 0.9rem; font-weight: 500;">可以用于商业用途吗？</summary>
+                    <p style="font-size: 0.85rem; color: #666; margin-top: 5px;">个人学习和非盈利性展示可免费使用；商业用途请查看具体授权协议。</p>
+                </details>
+                <details style="cursor: pointer;">
+                    <summary style="font-size: 0.9rem; font-weight: 500;">如何更新最新行政区划？</summary>
+                    <p style="font-size: 0.85rem; color: #666; margin-top: 5px;">我们定期根据俄罗斯联邦最新行政区划调整进行地图更新。</p>
+                </details>
+            </div>
+        </aside>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-col">
+            <div class="logo" style="color: white; margin-bottom: 1rem;">
+                <span>🇷🇺</span> GeoRussia
+            </div>
+            <p style="font-size: 0.9rem; color: #bdc3c7; line-height: 1.6;">
+                致力于为用户提供最全面、最准确的俄罗斯地理信息与地图资源服务。
+            </p>
+        </div>
+        <div class="footer-col">
+            <h4>地图资源</h4>
+            <ul>
+                <li><a href="#">俄罗斯行政区划图</a></li>
+                <li><a href="#">俄罗斯地形图</a></li>
+                <li><a href="#">俄罗斯交通图</a></li>
+                <li><a href="#">俄罗斯卫星地图</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>帮助中心</h4>
+            <ul>
+                <li><a href="#">使用说明</a></li>
+                <li><a href="#">版权声明</a></li>
+                <li><a href="#">联系我们</a></li>
+                <li><a href="#">网站地图</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>关注我们</h4>
+            <ul>
+                <li><a href="#">微信公众号</a></li>
+                <li><a href="#">新浪微博</a></li>
+                <li><a href="#">GitHub 仓库</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        &copy; 2023 GeoRussia 地理信息服务平台. All Rights Reserved.
+    </div>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</body>
+</html>
