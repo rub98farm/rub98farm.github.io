@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="姚政医生个人官方网站，提供权威的耳鼻喉科、鼻部整形及睡眠呼吸暂停诊疗服务。了解姚政医生的专业背景、擅长领域、出诊信息及患者评价，获取专业的医疗建议与预约指南。">
+    <meta name="keywords" content="姚政医生, 姚政, 耳鼻喉科医生, 鼻部整形, 睡眠呼吸暂停, 姚政医院">
+    <title>姚政医生-专业耳鼻喉科与鼻部整形诊疗专家</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #0056b3;
+            --primary-dark: #004494;
+            --accent-color: #e63946;
+            --text-main: #333333;
+            --text-secondary: #666666;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --border-color: #e0e0e0;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --radius: 8px;
+            --container-width: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-white);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Layout Utilities */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Header & Nav */
+        header {
+            background: var(--bg-white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            color: var(--text-main);
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .cta-button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #eef2f3 0%, #dfe9f3 100%);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        .hero-text .highlight {
+            color: var(--primary-color);
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            width: 100%;
+            height: auto;
+        }
+
+        /* Doctor Profile Card */
+        .profile-card {
+            background: var(--bg-white);
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+            max-width: 600px;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+        }
+
+        .profile-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .profile-info .title {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .profile-info .hospital {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Expertise Section */
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .expertise-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .expertise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-color);
+        }
+
+        .expertise-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #e6f0fa;
+            color: var(--primary-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .expertise-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.25rem;
+        }
+
+        .expertise-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Treatment Process */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .step {
+            position: relative;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 15px;
+        }
+
+        .step h4 {
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 15px;
+        }
+
+        .faq-question {
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            padding: 20px 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question:hover {
+            color: var(--primary-color);
+        }
+
+        .faq-answer {
+            padding-bottom: 20px;
+            color: var(--text-secondary);
+            display: none; /* Hidden by default for static demo, JS would toggle */
+        }
+        
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active .faq-question::after {
+            content: '-';
+        }
+
+        .faq-item:not(.active) .faq-question::after {
+            content: '+';
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: #ccc;
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h2 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .footer-links h4 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links ul li a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text p {
+                margin: 0 auto 30px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .profile-card {
+                margin: 0 20px;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* Simplified for mobile */
+            }
+            
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                姚政医生
+            </a>
+            <nav class="nav-links">
+                <a href="#about">医生简介</a>
+                <a href="#expertise">专业擅长</a>
+                <a href="#treatment">诊疗流程</a>
+                <a href="#faq">患者问答</a>
+            </nav>
+            <a href="#contact" class="cta-button">预约挂号</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <h1>专注于耳鼻喉科与<br><span class="highlight">鼻部整形</span>的资深专家</h1>
+                    <p>姚政医生致力于为患者提供精准的诊断与个性化的治疗方案，在鼻部疾病诊疗及整形美容领域拥有丰富的临床经验。</p>
+                    <div class="hero-buttons">
+                        <a href="#expertise" class="cta-button">了解专业领域</a>
+                        <a href="#faq" class="cta-button" style="background-color: white; color: var(--primary-color);">查看常见问题</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <!-- Placeholder for doctor image -->
+                    <img src="https://picsum.photos/seed/doctor_yao/600/400" alt="姚政医生工作照">
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Section -->
+        <section class="section" id="about">
+            <div class="container">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <img src="https://picsum.photos/seed/doctor_yao_avatar/150/150" alt="姚政医生头像" class="profile-avatar">
+                        <div class="profile-info">
+                            <h3>姚政</h3>
+                            <div class="title">主任医师 | 教授</div>
+                            <div class="hospital">[某知名三甲医院] 耳鼻咽喉头颈外科</div>
+                        </div>
+                    </div>
+                    <p>姚政医生拥有超过15年的临床工作经验，在耳鼻喉科常见病、多发病的诊治方面造诣深厚。尤其在鼻内镜微创手术、鼻整形及睡眠呼吸暂停综合征的诊疗方面，积累了大量成功案例。其严谨的医术与温婉的医患沟通风格，深受广大患者信赖。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expertise Section -->
+        <section class="section" style="background-color: var(--bg-light);" id="expertise">
+            <div class="container">
+                <div class="section-header">
+                    <h2>专业擅长领域</h2>
+                    <p>精准诊断，科学治疗，为您提供全方位的耳鼻喉健康服务</p>
+                </div>
+                <div class="expertise-grid">
+                    <article class="expertise-card">
+                        <div class="expertise-icon">👃</div>
+                        <h3>鼻部疾病诊疗</h3>
+                        <p>擅长慢性鼻炎、鼻窦炎、鼻中隔偏曲等疾病的微创手术治疗，注重术后功能恢复与嗅觉改善。</p>
+                    </article>
+                    <article class="expertise-card">
+                        <div class="expertise-icon">✂️</div>
+                        <h3>鼻部整形美容</h3>
+                        <p>提供个性化的鼻综合整形方案，包括隆鼻、鼻尖塑形及鼻修复手术，追求自然和谐的美学效果。</p>
+                    </article>
+                    <article class="expertise-card">
+                        <div class="expertise-icon">💤</div>
+                        <h3>睡眠呼吸暂停</h3>
+                        <p>专注于打呼噜、呼吸暂停综合征的诊断与治疗，熟练掌握悬雍垂腭咽成形术（UPPP）等手术技术。</p>
+                    </article>
+                    <article class="expertise-card">
+                        <div class="expertise-icon">👂</div>
+                        <h3>咽喉及听力保健</h3>
+                        <p>处理咽喉反流性疾病、声带息肉及中耳炎等疾病，提供专业的听力评估与康复指导。</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Treatment Process -->
+        <section class="section" id="treatment">
+            <div class="container">
+                <div class="section-header">
+                    <h2>标准诊疗流程</h2>
+                    <p>从初诊到康复，为您提供全程规范的医疗服务</p>
+                </div>
+                <div class="process-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h4>在线咨询/预约</h4>
+                        <p>通过电话或网络咨询，初步了解病情并预约专家门诊时间。</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h4>专业检查</h4>
+                        <p>进行鼻内镜、听力测试或睡眠监测等全面检查，明确诊断。</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h4>制定方案</h4>
+                        <p>姚政医生根据检查结果，与您深入沟通，制定个性化治疗方案。</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h4>治疗与康复</h4>
+                        <p>实施手术或规范治疗，并提供详细的术后护理指导与复查计划。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="section" style="background-color: var(--bg-light);" id="faq">
+            <div class="container">
+                <div class="section-header">
+                    <h2>患者常见问题</h2>
+                    <p>关于姚政医生及诊疗服务的常见疑问解答</p>
+                </div>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <button class="faq-question">姚政医生什么时候出诊？</button>
+                        <div class="faq-answer">
+                            <p>姚政医生通常每周一、周三上午在[某医院]出诊，具体时间请以医院挂号系统或官方通知为准。建议提前通过官方渠道预约，以免耽误就诊。</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">鼻整形手术恢复期需要多久？</button>
+                        <div class="faq-answer">
+                            <p>鼻整形手术的肿胀期通常持续1-2周，外观上基本自然需要1-3个月，完全恢复则需要6-12个月。姚政医生会在术后提供详细的护理建议，帮助您平稳度过恢复期。</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">睡眠呼吸暂停综合征一定要做手术吗？</button>
+                        <div class="faq-answer">
+                            <p>并非所有患者都需要手术。医生会根据睡眠监测报告的AHI指数及临床症状，先尝试佩戴呼吸机等无创治疗。若症状严重或无创治疗效果不佳，才会考虑手术治疗。</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">如何判断自己是否有鼻中隔偏曲？</button>
+                        <div class="faq-answer">
+                            <p>常见症状包括持续性鼻塞、头痛、鼻出血或反复鼻窦炎。建议通过鼻内镜检查来确诊，姚政医生擅长通过微创手段解决此类问题。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact / CTA Section -->
+        <section class="section" id="contact" style="background-color: var(--primary-color); color: white;">
+            <div class="container" style="text-align: center;">
+                <h2 style="margin-bottom: 20px;">准备好改善您的健康了吗？</h2>
+                <p style="margin-bottom: 30px; font-size: 1.1rem; opacity: 0.9;">立即预约姚政医生的专家号，获取专业的耳鼻喉诊疗建议。</p>
+                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                    <a href="#" class="cta-button" style="background-color: white; color: var(--primary-color);">电话预约</a>
+                    <a href="#" class="cta-button" style="border: 1px solid white;">在线咨询</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h2>姚政医生</h2>
+                    <p>致力于耳鼻喉健康事业，以精湛医术和人文关怀，守护每一位患者的呼吸与睡眠健康。</p>
+                </div>
+                <div class="footer-links">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="#about">医生简介</a></li>
+                        <li><a href="#expertise">擅长领域</a></li>
+                        <li><a href="#treatment">诊疗流程</a></li>
+                        <li><a href="#faq">患者问答</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>相关服务</h4>
+                    <ul>
+                        <li><a href="#">鼻部疾病</a></li>
+                        <li><a href="#">鼻整形咨询</a></li>
+                        <li><a href="#">睡眠监测</a></li>
+                        <li><a href="#">术后复查</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>联系我们</h4>
+                    <ul>
+                        <li>地址：[某省某市某区某路123号]</li>
+                        <li>电话：010-1234-5678</li>
+                        <li>邮箱：contact@yaozheng-doc.com</li>
+                        <li>门诊时间：周一、周三上午</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 姚政医生医疗咨询服务中心 版权所有 | 仅供展示参考，非真实医疗预约平台</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple FAQ Accordion Logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    // Close other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
