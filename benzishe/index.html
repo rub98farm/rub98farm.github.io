@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>本子社-二次元同人创作与交流平台</title>
+    <meta name="description" content="本子社是一个专注于二次元同人创作的在线社区与展示平台，汇集了各类同人志、插画作品与创作者动态，致力于为画师与读者提供自由交流的空间。">
+    <meta name="keywords" content="本子社,同人志,二次元,插画,画师社区,同人创作">
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --secondary-color: #a29bfe;
+            --accent-color: #fd79a8;
+            --bg-color: #f9f9fc;
+            --card-bg: #ffffff;
+            --text-main: #2d3436;
+            --text-sub: #636e72;
+            --border-radius: 12px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --container-width: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 24px;
+        }
+
+        nav a {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-sub);
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 2px 6px rgba(108, 92, 231, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #5649c0;
+            transform: translateY(-1px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 16px;
+            color: var(--text-main);
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-sub);
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .search-bar {
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 14px 20px;
+            padding-right: 120px;
+            border-radius: 30px;
+            border: 1px solid #dfe6e9;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-bar input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 6px;
+            top: 6px;
+            bottom: 6px;
+            padding: 0 24px;
+        }
+
+        /* Layout */
+        .container {
+            max-width: var(--container-width);
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 240px 1fr 300px;
+            gap: 30px;
+        }
+
+        /* Sidebar Left */
+        .sidebar-left {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .category-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .category-card h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .category-list li {
+            margin-bottom: 10px;
+        }
+
+        .category-list a {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-sub);
+            font-size: 14px;
+        }
+
+        .category-list a:hover {
+            color: var(--primary-color);
+        }
+
+        .count {
+            background: #f0f0f0;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-header h2::before {
+            content: '';
+            display: block;
+            width: 4px;
+            height: 20px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        /* Grid System */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .work-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .work-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .work-cover {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            background-color: #eee;
+        }
+
+        .work-info {
+            padding: 16px;
+        }
+
+        .work-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .work-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-sub);
+        }
+
+        .author {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .author-avatar {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: #ddd;
+        }
+
+        /* Rank List */
+        .rank-list {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .rank-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .rank-item:last-child {
+            border-bottom: none;
+        }
+
+        .rank-num {
+            font-size: 18px;
+            font-weight: 800;
+            color: #dfe6e9;
+            width: 24px;
+            text-align: center;
+        }
+
+        .rank-item:nth-child(1) .rank-num { color: #ff7675; }
+        .rank-item:nth-child(2) .rank-num { color: #fab1a0; }
+        .rank-item:nth-child(3) .rank-num { color: #ffeaa7; }
+
+        .rank-thumb {
+            width: 50px;
+            height: 50px;
+            border-radius: 6px;
+            margin-right: 12px;
+            object-fit: cover;
+        }
+
+        .rank-info h4 {
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .rank-info span {
+            font-size: 12px;
+            color: var(--text-sub);
+        }
+
+        /* Sidebar Right */
+        .sidebar-right {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .notice-board {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .notice-item {
+            font-size: 13px;
+            color: var(--text-sub);
+            padding: 8px 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .notice-item:last-child {
+            border-bottom: none;
+        }
+
+        .notice-item b {
+            color: var(--primary-color);
+            margin-right: 5px;
+        }
+
+        /* Footer */
+        footer {
+            background: #2d3436;
+            color: #b2bec3;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-col a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #636e72;
+            font-size: 12px;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .container {
+                grid-template-columns: 200px 1fr;
+            }
+            .sidebar-right {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-wrap: wrap;
+                height: auto;
+                padding: 15px;
+            }
+            nav {
+                width: 100%;
+                order: 3;
+                margin-top: 15px;
+            }
+            nav ul {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 5px;
+            }
+            .header-actions {
+                order: 2;
+            }
+            .container {
+                grid-template-columns: 1fr;
+            }
+            .sidebar-left {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <a href="#" class="logo">
+            <span>本子社</span>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">首页</a></li>
+                <li><a href="#">同人志</a></li>
+                <li><a href="#">插画集</a></li>
+                <li><a href="#">周边商品</a></li>
+                <li><a href="#">画师专栏</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <button class="btn btn-outline">登录</button>
+            <button class="btn btn-primary">投稿</button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>发现属于你的二次元世界</h1>
+        <p>汇聚全网优质同人创作，探索无限可能。无论是经典IP的二次创作，还是原创角色的奇幻冒险，本子社都是你展示与发现的最佳舞台。</p>
+        <div class="search-bar">
+            <input type="text" placeholder="搜索作品、画师或标签...">
+            <button class="btn btn-primary">搜索</button>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar-left">
+            <div class="category-card">
+                <h3>热门分类</h3>
+                <ul class="category-list">
+                    <li><a href="#">全年龄向 <span class="count">1.2k</span></a></li>
+                    <li><a href="#">科幻奇幻 <span class="count">850</span></a></li>
+                    <li><a href="#">校园日常 <span class="count">2.1k</span></a></li>
+                    <li><a href="#">悬疑推理 <span class="count">630</span></a></li>
+                    <li><a href="#">历史架空 <span class="count">420</span></a></li>
+                    <li><a href="#">美食轻小说 <span class="count">980</span></a></li>
+                </ul>
+            </div>
+            <div class="category-card">
+                <h3>近期活动</h3>
+                <ul class="category-list">
+                    <li><a href="#">夏日祭主题征稿 <span class="count">进行中</span></a></li>
+                    <li><a href="#">新人画师扶持计划 <span class="count">截止: 30天</span></a></li>
+                    <li><a href="#">经典动漫同人展 <span class="count">已结束</span></a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <section class="main-content">
+            
+            <!-- Featured Section -->
+            <div>
+                <div class="section-header">
+                    <h2>精选推荐</h2>
+                    <a href="#" style="font-size: 14px; color: var(--primary-color);">查看全部 ></a>
+                </div>
+                <div class="card-grid">
+                    <article class="work-card">
+                        <img src="https://picsum.photos/seed/manga1/300/400" alt="作品封面" class="work-cover">
+                        <div class="work-info">
+                            <h3 class="work-title">星夜下的约定</h3>
+                            <div class="work-meta">
+                                <div class="author">
+                                    <img src="https://picsum.photos/seed/avatar1/50/50" alt="作者头像" class="author-avatar">
+                                    <span>星尘绘</span>
+                                </div>
+                                <span>12.5k 阅读</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="work-card">
+                        <img src="https://picsum.photos/seed/manga2/300/400" alt="作品封面" class="work-cover">
+                        <div class="work-info">
+                            <h3 class="work-title">赛博朋克：边缘行者</h3>
+                            <div class="work-meta">
+                                <div class="author">
+                                    <img src="https://picsum.photos/seed/avatar2/50/50" alt="作者头像" class="author-avatar">
+                                    <span>霓虹刀</span>
+                                </div>
+                                <span>8.9k 阅读</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="work-card">
+                        <img src="https://picsum.photos/seed/manga3/300/400" alt="作品封面" class="work-cover">
+                        <div class="work-info">
+                            <h3 class="work-title">魔法学院的午后</h3>
+                            <div class="work-meta">
+                                <div class="author">
+                                    <img src="https://picsum.photos/seed/avatar3/50/50" alt="作者头像" class="author-avatar">
+                                    <span>莉莉丝</span>
+                                </div>
+                                <span>15.2k 阅读</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="work-card">
+                        <img src="https://picsum.photos/seed/manga4/300/400" alt="作品封面" class="work-cover">
+                        <div class="work-info">
+                            <h3 class="work-title">古都的旅人</h3>
+                            <div class="work-meta">
+                                <div class="author">
+                                    <img src="https://picsum.photos/seed/avatar4/50/50" alt="作者头像" class="author-avatar">
+                                    <span>墨客</span>
+                                </div>
+                                <span>5.6k 阅读</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Ranking Section -->
+            <div>
+                <div class="section-header">
+                    <h2>周榜推荐</h2>
+                </div>
+                <div class="rank-list">
+                    <div class="rank-item">
+                        <div class="rank-num">1</div>
+                        <img src="https://picsum.photos/seed/rank1/100/100" alt="封面" class="rank-thumb">
+                        <div class="rank-info">
+                            <h4>绯红之翼：觉醒</h4>
+                            <span>作者：绯红之翼 | 23.4k 阅读</span>
+                        </div>
+                    </div>
+                    <div class="rank-item">
+                        <div class="rank-num">2</div>
+                        <img src="https://picsum.photos/seed/rank2/100/100" alt="封面" class="rank-thumb">
+                        <div class="rank-info">
+                            <h4>深海迷航</h4>
+                            <span>作者：深蓝 | 19.8k 阅读</span>
+                        </div>
+                    </div>
+                    <div class="rank-item">
+                        <div class="rank-num">3</div>
+                        <img src="https://picsum.photos/seed/rank3/100/100" alt="封面" class="rank-thumb">
+                        <div class="rank-info">
+                            <h4>校园恋爱物语</h4>
+                            <span>作者：桃子 | 18.1k 阅读</span>
+                        </div>
+                    </div>
+                    <div class="rank-item">
+                        <div class="rank-num">4</div>
+                        <img src="https://picsum.photos/seed/rank4/100/100" alt="封面" class="rank-thumb">
+                        <div class="rank-info">
+                            <h4>异界快递员</h4>
+                            <span>作者：快腿 | 12.5k 阅读</span>
+                        </div>
+                    </div>
+                    <div class="rank-item">
+                        <div class="rank-num">5</div>
+                        <img src="https://picsum.photos/seed/rank5/100/100" alt="封面" class="rank-thumb">
+                        <div class="rank-info">
+                            <h4>机械降神</h4>
+                            <span>作者：齿轮 | 11.2k 阅读</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Works Section -->
+            <div>
+                <div class="section-header">
+                    <h2>最新更新</h2>
+                </div>
+                <div class="card-grid">
+                    <article class="work-card">
+                        <img src="https://picsum.photos/seed/new1/300/400" alt="作品封面" class="work-cover">
+                        <div class="work-info">
+                            <h3 class="work-title">迷失森林</h3>
+                            <div class="work-meta">
+                                <div class="author">
+                                    <img src="https://picsum.photos/seed/new1a/50/50" alt="作者头像" class="author-avatar">
+                                    <span>迷途</span>
+                                </div>
+                                <span>刚刚更新</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="work-card">
+                        <img src="https://picsum.photos/seed/new2/300/400" alt="作品封面" class="work-cover">
+                        <div class="work-info">
+                            <h3 class="work-title">末日求生指南</h3>
+                            <div class="work-meta">
+                                <div class="author">
+                                    <img src="https://picsum.photos/seed/new2a/50/50" alt="作者头像" class="author-avatar">
+                                    <span>生存者</span>
+                                </div>
+                                <span>5分钟前</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="work-card">
+                        <img src="https://picsum.photos/seed/new3/300/400" alt="作品封面" class="work-cover">
+                        <div class="work-info">
+                            <h3 class="work-title">猫耳娘日常</h3>
+                            <div class="work-meta">
+                                <div class="author">
+                                    <img src="https://picsum.photos/seed/new3a/50/50" alt="作者头像" class="author-avatar">
+                                    <span>Momo</span>
+                                </div>
+                                <span>20分钟前</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="work-card">
+                        <img src="https://picsum.photos/seed/new4/300/400" alt="作品封面" class="work-cover">
+                        <div class="work-info">
+                            <h3 class="work-title">机械纪元</h3>
+                            <div class="work-meta">
+                                <div class="author">
+                                    <img src="https://picsum.photos/seed/new4a/50/50" alt="作者头像" class="author-avatar">
+                                    <span>Zero</span>
+                                </div>
+                                <span>1小时前</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Right Sidebar -->
+        <aside class="sidebar-right">
+            <div class="notice-board">
+                <h3>社区公告</h3>
+                <div class="notice-item"><b>公告</b>关于规范同人作品版权标注的说明</div>
+                <div class="notice-item"><b>活动</b>“夏日祭”主题同人征稿现已开启</div>
+                <div class="notice-item"><b>维护</b>服务器将于本周五凌晨进行例行维护</div>
+                <div class="notice-item"><b>福利</b>注册即送新人大礼包</div>
+            </div>
+            
+            <div class="category-card">
+                <h3>热门标签</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    <a href="#" class="btn btn-outline" style="padding: 4px 10px; font-size: 12px; border: 1px solid #eee;">#原创</a>
+                    <a href="#" class="btn btn-outline" style="padding: 4px 10px; font-size: 12px; border: 1px solid #eee;">#治愈</a>
+                    <a href="#" class="btn btn-outline" style="padding: 4px 10px; font-size: 12px; border: 1px solid #eee;">#热血</a>
+                    <a href="#" class="btn btn-outline" style="padding: 4px 10px; font-size: 12px; border: 1px solid #eee;">#虐心</a>
+                    <a href="#" class="btn btn-outline" style="padding: 4px 10px; font-size: 12px; border: 1px solid #eee;">#搞笑</a>
+                    <a href="#" class="btn btn-outline" style="padding: 4px 10px; font-size: 12px; border: 1px solid #eee;">#后宫</a>
+                </div>
+            </div>
+        </aside>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-col" style="flex: 1; min-width: 200px;">
+            <div class="logo" style="margin-bottom: 15px;">
+                <span>本子社</span>
+            </div>
+            <p style="font-size: 14px; opacity: 0.7;">本子社是一个专注于二次元同人创作的社区平台，致力于为画师和读者提供一个纯粹、自由、尊重版权的交流空间。</p>
+        </div>
+        <div class="footer-col">
+            <h4>关于我们</h4>
+            <ul>
+                <li><a href="#">平台介绍</a></li>
+                <li><a href="#">加入我们</a></li>
+                <li><a href="#">联系方式</a></li>
+                <li><a href="#">隐私政策</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>创作者中心</h4>
+            <ul>
+                <li><a href="#">投稿指南</a></li>
+                <li><a href="#">收益分成</a></li>
+                <li><a href="#">版权保护</a></li>
+                <li><a href="#">工具下载</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>帮助中心</h4>
+            <ul>
+                <li><a href="#">常见问题</a></li>
+                <li><a href="#">社区规范</a></li>
+                <li><a href="#">反馈建议</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        &copy; 2023 本子社. All Rights Reserved. 本站内容均由用户上传，仅供学习交流，请勿用于商业用途。
+    </div>
+</footer>
+
+</body>
+                  </html>
