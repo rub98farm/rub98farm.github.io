@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北京到廊坊的火车 - 在线购票、时刻表查询与出行指南</title>
+    <meta name="description" content="提供北京到廊坊火车时刻表查询、票价信息及出行指南。涵盖高铁、动车及普速列车的最新时刻、余票情况及换乘建议，助您轻松规划通勤行程。">
+    <meta name="keywords" content="北京到廊坊的火车,北京到廊坊高铁,北京到廊坊时刻表,北京廊坊火车票,北京廊坊通勤">
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #0056b3;
+            --secondary-color: #f0f4f8;
+            --accent-color: #ff6b00;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --border-color: #e1e4e8;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --radius: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #f9fafb;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Layout Utilities */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding {
+            padding: 60px 0;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo svg {
+            width: 32px;
+            height: 32px;
+            fill: currentColor;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0056b3 0%, #003d80 100%);
+            color: var(--white);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+
+        /* Search Box */
+        .search-box {
+            background: var(--white);
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: flex-end;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 200px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.1s, opacity 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Route Info Card */
+        .route-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            margin-top: -30px;
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+        }
+
+        .route-header {
+            background: var(--secondary-color);
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .route-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .route-meta {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .route-body {
+            padding: 30px;
+        }
+
+        .route-station {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .station-info {
+            text-align: center;
+            flex: 1;
+        }
+
+        .station-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .station-code {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            background: #eef2f7;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .station-arrow {
+            flex: 0 0 100px;
+            text-align: center;
+            position: relative;
+            padding: 0 10px;
+        }
+
+        .station-arrow::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background: var(--border-color);
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+
+        .train-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--white);
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            color: var(--primary-color);
+        }
+
+        .duration {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        /* Schedule Table */
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .schedule-table th {
+            text-align: left;
+            padding: 12px;
+            background: var(--secondary-color);
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .schedule-table td {
+            padding: 15px 12px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
+        }
+
+        .schedule-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .schedule-table tr:hover {
+            background-color: #fafbfc;
+        }
+
+        .train-num {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .time {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .price {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+
+        .tag-high-speed {
+            background: #e6f7ff;
+            color: #1890ff;
+        }
+
+        .tag-daily {
+            background: #f6ffed;
+            color: #52c41a;
+        }
+
+        /* Features Section */
+        .features {
+            background: var(--white);
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 30px;
+            border-radius: var(--radius);
+            background: var(--secondary-color);
+            transition: transform 0.3s;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            background: var(--primary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .feature-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Guide Section */
+        .guide-section {
+            background: #f8f9fa;
+        }
+
+        .guide-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .guide-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .guide-card p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .guide-list li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+            color: var(--text-dark);
+        }
+
+        .guide-list li::before {
+            content: '•';
+            color: var(--primary-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* FAQ Section */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .faq-item {
+            background: var(--white);
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .faq-question {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .faq-answer {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a202c;
+            color: #a0aec0;
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--white);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #2d3748;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-inner {
+                flex-direction: column;
+                height: auto;
+                padding: 15px 0;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 15px;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .grid-2, .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+
+            .station-arrow {
+                transform: rotate(90deg);
+                margin: 10px 0;
+            }
+            
+            .station-arrow::after {
+                transform: translate(-50%, -50%) rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container header-inner">
+        <div class="logo">
+            <svg viewBox="0 0 24 24"><path d="M12 2c-4.42 0-8 3.58-8 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+            京廊出行通
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">时刻表</a></li>
+                <li><a href="#">购票指南</a></li>
+                <li><a href="#">车站信息</a></li>
+                <li><a href="#">出行攻略</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="container">
+            <h1>北京到廊坊的火车</h1>
+            <p>高效查询北京至廊坊列车时刻、票价及余票信息，一站式服务您的通勤与出行需求。</p>
+            
+            <form class="search-box" onsubmit="event.preventDefault();">
+                <div class="form-group">
+                    <label for="from">出发站</label>
+                    <select id="from" class="form-control">
+                        <option value="bj">北京站</option>
+                        <option value="bjy">北京运化</option>
+                        <option value="bjd">北京东站</option>
+                        <option value="bjx">北京西站</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="to">到达站</label>
+                    <select id="to" class="form-control">
+                        <option value="lf">廊坊站</option>
+                        <option value="lfz">廊坊北站</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">出发日期</label>
+                    <input type="date" id="date" class="form-control" value="2023-10-27">
+                </div>
+                <button type="submit" class="btn btn-primary">查询车次</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="container section-padding">
+        <div class="route-card">
+            <div class="route-header">
+                <div class="route-title">北京 → 廊坊</div>
+                <div class="route-meta">全程约 50 - 60 公里 · 运行时间 30 - 45 分钟</div>
+            </div>
+            <div class="route-body">
+                <div class="route-station">
+                    <div class="station-info">
+                        <div class="station-name">北京站</div>
+                        <div class="station-code">BJP</div>
+                    </div>
+                    <div class="station-arrow">
+                        <div class="train-icon">
+                            <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:currentColor;"><path d="M12 2c-4.42 0-8 3.58-8 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+                        </div>
+                        <div class="duration">约 35 分钟</div>
+                    </div>
+                    <div class="station-info" style="text-align: right;">
+                        <div class="station-name">廊坊站</div>
+                        <div class="station-code">LFQ</div>
+                    </div>
+                </div>
+
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>车次</th>
+                            <th>出发站-到达站</th>
+                            <th>出发时间</th>
+                            <th>到达时间</th>
+                            <th>历时</th>
+                            <th>票价 (二等座)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="train-num">G9011</span></td>
+                            <td>北京南 <span class="tag tag-high-speed">高铁</span></td>
+                            <td class="time">06:18</td>
+                            <td class="time">06:54</td>
+                            <td>00:36</td>
+                            <td class="price">¥54.5</td>
+                        </tr>
+                        <tr>
+                            <td><span class="train-num">G9013</span></td>
+                            <td>北京南 <span class="tag tag-high-speed">高铁</span></td>
+                            <td class="time">07:18</td>
+                            <td class="time">07:54</td>
+                            <td>00:36</td>
+                            <td class="price">¥54.5</td>
+                        </tr>
+                        <tr>
+                            <td><span class="train-num">G9015</span></td>
+                            <td>北京南 <span class="tag tag-high-speed">高铁</span></td>
+                            <td class="time">08:18</td>
+                            <td class="time">08:54</td>
+                            <td>00:36</td>
+                            <td class="price">¥54.5</td>
+                        </tr>
+                        <tr>
+                            <td><span class="train-num">G9017</span></td>
+                            <td>北京南 <span class="tag tag-high-speed">高铁</span></td>
+                            <td class="time">09:18</td>
+                            <td class="time">09:54</td>
+                            <td>00:36</td>
+                            <td class="price">¥54.5</td>
+                        </tr>
+                        <tr>
+                            <td><span class="train-num">G9019</span></td>
+                            <td>北京南 <span class="tag tag-high-speed">高铁</span></td>
+                            <td class="time">10:18</td>
+                            <td class="time">10:54</td>
+                            <td>00:36</td>
+                            <td class="price">¥54.5</td>
+                        </tr>
+                        <tr>
+                            <td><span class="train-num">G9021</span></td>
+                            <td>北京南 <span class="tag tag-high-speed">高铁</span></td>
+                            <td class="time">11:18</td>
+                            <td class="time">11:54</td>
+                            <td>00:36</td>
+                            <td class="price">¥54.5</td>
+                        </tr>
+                        <tr>
+                            <td><span class="train-num">G9023</span></td>
+                            <td>北京南 <span class="tag tag-high-speed">高铁</span></td>
+                            <td class="time">12:18</td>
+                            <td class="time">12:54</td>
+                            <td>00:36</td>
+                            <td class="price">¥54.5</td>
+                        </tr>
+                        <tr>
+                            <td><span class="train-num">G9025</span></td>
+                            <td>北京南 <span class="tag tag-high-speed">高铁</span></td>
+                            <td class="time">13:18</td>
+                            <td class="time">13:54</td>
+                            <td>00:36</td>
+                            <td class="price">¥54.5</td>
+                        </tr>
+                        <tr>
+                            <td><span class="train-num">G9027</span></td>
+                            <td>北京南 <span class="tag tag-high-speed">高铁</span></td>
+                            <td class="time">14:18</td>
+                            <td class="time">14:54</td>
+                            <td>00:36</td>
+                            <td class="price">¥54.5</td>
+                        </tr>
+                        <tr>
+                            <td><span class="train-num">G9029</span></td>
+                            <td>北京南 <span class="tag tag-high-speed">高铁</span></td>
+                            <td class="time">15:18</td>
+                            <td class="time">15:54</td>
+                            <td>00:36</td>
+                            <td class="price">¥54.5</td>
+                        </tr>
+                        <tr>
+                            <td><span class="train-num">G9031</span></td>
+                            <td>北京南 <span class="tag tag-high-speed">高铁</span></td>
+                            <td class="time">16:18</td>
+                            <td class="time">16:54</td>
+                            <td>00:36</td>
+                            <td class="price">¥54.5</td>
+                        </tr>
+                        <tr>
+                            <td><span class="train-num">G9033</span></td>
+                            <td>北京南 <span class="tag tag-high-speed">高铁</span></td>
+                            <td class="time">17:18</td>
+                            <td class="time">17:54</td>
+                            <td>00:36</td>
+                            <td class="price">¥54.5</td>
+                        </tr>
+                        <tr>
+                            <td><span class="train-num">G9035</span></td>
+                            <td>北京南 <span class="tag tag-high-speed">高铁</span></td>
+                            <td class="time">18:18</td>
+                            <td class="time">18:54</td>
+                            <td>00:36</td>
+                            <td class="price">¥54.5</td>
+                        </tr>
+                        <tr>
+                            <td><span class="train-num">G9037</span></td>
+                            <td>北京南 <span class="tag tag-high-speed">高铁</span></td>
+                            <td class="time">19:18</td>
+                            <td class="time">19:54</td>
+                            <td>00:36</td>
+                            <td class="price">¥54.5</td>
+                        </tr>
+                        <tr>
+                            <td><span class="train-num">G9039</span></td>
+                            <td>北京南 <span class="tag tag-high-speed">高铁</span></td>
+                            <td class="time">20:18</td>
+                            <td class="time">20:54</td>
+                            <td>00:36</td>
+                            <td class="price">¥54.5</td>
+                        </tr>
+                        <tr>
+                            <td><span class="train-num">G9041</span></td>
+                            <td>北京南 <span class="tag tag-high-speed">高铁</span></td>
+                            <td class="time">21:18</td>
+                            <td class="time">21:54</td>
+                            <td>00:36</td>
+                            <td class="price">¥54.5</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="features section-padding">
+        <div class="container">
+            <div class="grid-4">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                    </div>
+                    <div class="feature-title">实时余票</div>
+                    <div class="feature-desc">提供全国范围内列车余票实时查询，助您及时掌握出行机会。</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                    </div>
+                    <div class="feature-title">精准时刻</div>
+                    <div class="feature-desc">整合铁路局官方数据，确保车次、到站、发车时间准确无误。</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                    </div>
+                    <div class="feature-title">安全购票</div>
+                    <div class="feature-desc">支持多种支付方式，保障您的个人信息与交易资金安全。</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                    </div>
+                    <div class="feature-title">通勤优选</div>
+                    <div class="feature-desc">特别针对京津城际通勤需求优化，提供早晚高峰车次推荐。</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="guide-section section-padding">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 40px; font-size: 2rem; color: var(--text-dark);">出行指南</h2>
+            <div class="grid-2">
+                <div class="guide-card">
+                    <h3>📍 车站选择指南</h3>
+                    <p>北京至廊坊方向主要涉及<strong>北京南站</strong>和<strong>北京站</strong>。绝大多数高铁和城际列车（如C字头、G字头）始发或终到于北京南站，这是最主要的出发站点。</p>
+                    <p>如果您从<strong>北京站</strong>出发，主要乘坐普速列车或部分城际列车，到达<strong>廊坊站</strong>或<strong>廊坊北站</strong>。</p>
+                </div>
+                <div class="guide-card">
+                    <h3>🎫 购票与乘车注意事项</h3>
+                    <ul class="guide-list">
+                        <li>京津城际铁路支持“铁路e卡通”刷卡乘车，无需提前购票。</li>
+                        <li>建议提前30分钟到达车站，预留充足的安检和候车时间。</li>
+                        <li>到达廊坊站后，可换乘公交、出租车或网约车前往市区。</li>
+                        <li>关注铁路12306官方渠道，获取最新的列车运行图调整信息。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container section-padding">
+        <h2 style="text-align: center; margin-bottom: 40px; font-size: 2rem; color: var(--text-dark);">常见问题 (FAQ)</h2>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--primary-color)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+                    北京到廊坊坐火车要多久？
+                </div>
+                <div class="faq-answer">乘坐高铁（G字头）通常需要30分钟左右，乘坐城际列车（C字头）约需35分钟，普速列车（K/T字头）根据车次不同，耗时通常在1小时至1.5小时之间。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--primary-color)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+                    北京到廊坊的票价是多少？
+                </div>
+                <div class="faq-answer">二等座票价通常在¥54.5左右，一等座票价约¥92。具体票价以购票时系统显示为准。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--primary-color)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+                    廊坊有哪些火车站？
+                </div>
+                <div class="faq-answer">廊坊市主要火车站为<strong>廊坊站</strong>（主要停靠高铁和普速列车），以及<strong>廊坊北站</strong>（主要停靠高铁和城际列车，如京津城际支线）。</div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>关于我们</h4>
+                <p style="font-size: 0.9rem; line-height: 1.6;">京廊出行通致力于为京津廊通勤人群提供最便捷、准确的火车票务查询服务。数据来源：铁路12306。</p>
+            </div>
+            <div class="footer-col">
+                <h4>快速链接</h4>
+                <ul>
+                    <li><a href="#">时刻表查询</a></li>
+                    <li><a href="#">余票查询</a></li>
+                    <li><a href="#">车站列表</a></li>
+                    <li><a href="#">退改签指南</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>服务支持</h4>
+                <ul>
+                    <li><a href="#">购票帮助</a></li>
+                    <li><a href="#">常见问题</a></li>
+                    <li><a href="#">联系客服</a></li>
+                    <li><a href="#">意见反馈</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>关注我们</h4>
+                <ul>
+                    <li><a href="#">微信公众号</a></li>
+                    <li><a href="#">官方微博</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 京廊出行通. All Rights Reserved. 本站非12306官方网站，仅提供信息查询服务。</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+                  </html>
