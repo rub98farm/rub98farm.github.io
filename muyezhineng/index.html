@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>木业智能装备应用技术-智能木材加工解决方案与行业应用指南</title>
+    <meta name="description" content="本站提供木业智能装备应用技术的全面解决方案，涵盖智能锯切、自动化分拣、数控加工中心及AI视觉检测系统。详细介绍设备选型、工艺优化、安装调试及维护保养，助力木材加工企业实现数字化转型与降本增效。">
+    <meta name="keywords" content="木业智能装备应用技术,智能木材加工设备,自动化锯切系统,数控木工机床,木材分拣机器人,木材加工自动化">
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #d35400;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --text-secondary: #666666;
+            --border-radius: 8px;
+            --spacing-unit: 20px;
+            --container-width: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: var(--text-color);
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .btn-contact {
+            background-color: var(--accent-color);
+            color: white !important;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .btn-contact:hover {
+            background-color: #ba4a00;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2c3e50 0%, #4ca1af 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #a04000;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 60px var(--spacing-unit);
+        }
+
+        /* Section Titles */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Application Areas Grid */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            font-size: 1.25rem;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .card-link {
+            color: var(--accent-color);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Tech Stack Section */
+        .tech-section {
+            background-color: #eef2f5;
+            padding: 60px 0;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .tech-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .tech-item p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-bottom: 60px;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            background-color: var(--card-bg);
+            transition: background-color 0.3s;
+        }
+
+        .faq-question:hover {
+            background-color: #f1f1f1;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            background-color: #fafafa;
+            color: var(--text-secondary);
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px; /* Arbitrary large height */
+        }
+
+        .faq-item.active .faq-question {
+            color: var(--accent-color);
+        }
+
+        .icon-plus {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .icon-plus {
+            transform: rotate(45deg);
+        }
+
+        /* Process Section */
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 50px;
+            right: 50px;
+            height: 2px;
+            background-color: #ddd;
+            z-index: 0;
+            display: none;
+        }
+
+        @media(min-width: 768px) {
+            .process-steps::before {
+                display: block;
+            }
+        }
+
+        .step {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 15px;
+            border: 4px solid var(--bg-color);
+        }
+
+        .step h4 {
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                height: auto;
+                padding: 15px;
+            }
+
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .process-steps {
+                flex-direction: column;
+            }
+
+            .process-steps::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <span>WoodTech</span> 智造
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#applications">应用领域</a></li>
+                    <li><a href="#tech-solutions">技术方案</a></li>
+                    <li><a href="#process">实施流程</a></li>
+                    <li><a href="#faq">常见问题</a></li>
+                    <li><a href="#contact" class="btn-contact">获取方案</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>木业智能装备应用技术</h1>
+            <p>融合AI视觉、数控技术与自动化物流，重新定义木材加工效率与精度。从原木到成品，全流程智能化升级。</p>
+            <div class="hero-buttons">
+                <a href="#applications" class="btn btn-primary">探索应用场景</a>
+                <a href="#tech-solutions" class="btn btn-outline">了解核心技术</a>
+            </div>
+        </div>
+    </section>
+
+    <main class="main-container">
+        
+        <!-- 核心应用场景 -->
+        <section id="applications">
+            <div class="section-header">
+                <h2>核心应用场景</h2>
+                <p>针对木材加工行业的痛点，提供定制化的智能装备解决方案，覆盖从原木处理到精细家具制造的各个环节。</p>
+            </div>
+            <div class="grid-3">
+                <article class="card">
+                    <div class="card-icon">🪓</div>
+                    <h3>智能原木锯切系统</h3>
+                    <p>利用多传感器融合技术，结合三维建模，实现原木径级识别、纹理分析及最优下料方案，大幅提升出材率。</p>
+                    <a href="#" class="card-link">查看详情 &rarr;</a>
+                </article>
+                <article class="card">
+                    <div class="card-icon">🤖</div>
+                    <h3>自动化分拣与打包</h3>
+                    <p>通过AI视觉识别板材等级与瑕疵，自动分配至不同料仓，配合AGV小车与机械手实现无人化打包与码垛。</p>
+                    <a href="#" class="card-link">查看详情 &rarr;</a>
+                </article>
+                <article class="card">
+                    <div class="card-icon">⚙️</div>
+                    <h3>数控加工中心 (CNC)</h3>
+                    <p>集成高精度五轴联动技术与智能刀具管理系统，实现复杂曲面加工的自动化与零废品率，适应高端定制需求。</p>
+                    <a href="#" class="card-link">查看详情 &rarr;</a>
+                </article>
+            </div>
+        </section>
+
+        <!-- 技术解决方案 -->
+        <section id="tech-solutions" class="tech-section">
+            <div class="main-container">
+                <div class="section-header">
+                    <h2>技术解决方案</h2>
+                    <p>木业智能装备应用技术不仅仅是硬件的堆砌，更是数据驱动的工艺优化。</p>
+                </div>
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <h4>AI视觉检测</h4>
+                        <p>替代人工肉眼，精准识别木材裂纹、节疤、色差等缺陷，准确率高达99%。</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>工业物联网 (IIoT)</h4>
+                        <p>设备联网，实时传输加工数据，支持远程监控、故障预警及能耗管理。</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>数字孪生技术</h4>
+                        <p>构建虚拟工厂模型，在虚拟环境中模拟生产流程，优化排产与资源配置。</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>柔性制造系统</h4>
+                        <p>适应多品种、小批量生产模式，通过快速换模技术实现柔性化生产。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 实施流程 -->
+        <section id="process">
+            <div class="section-header">
+                <h2>落地实施流程</h2>
+                <p>从需求分析到投产运行，我们提供全生命周期的技术服务，确保项目顺利落地。</p>
+            </div>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h4>现场勘测</h4>
+                    <p>深入车间，分析现有工艺流程与产能瓶颈。</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h4>方案设计</h4>
+                    <p>定制智能化改造蓝图，输出设备选型与布局图。</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h4>安装调试</h4>
+                    <p>设备进场安装、PLC编程调试与视觉算法训练。</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h4>人员培训</h4>
+                    <p>操作员技能培训与维护人员技术指导。</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h4>验收交付</h4>
+                    <p>试运行考核，数据达标后正式移交。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 常见问题 FAQ -->
+        <section id="faq">
+            <div class="section-header">
+                <h2>常见问题解答</h2>
+                <p>关于木业智能装备应用技术的常见疑问与解答。</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        智能装备改造需要多长时间？
+                        <span class="icon-plus">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>改造周期取决于现有产线的复杂程度和改造范围。一般小型产线的局部改造（如增加分拣系统）需要2-4周，大型全流程自动化产线通常需要3-6个月。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        旧设备可以升级吗？
+                        <span class="icon-plus">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>可以。我们提供成熟的设备改造方案，包括加装视觉检测模块、更换数控控制系统以及集成通讯接口，使旧设备具备智能化功能。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        木材分拣的准确率能达到多少？
+                        <span class="icon-plus">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>在光照条件稳定、木材纹理相对清晰的情况下，现代基于深度学习的视觉系统对常见缺陷（如死节、裂纹）的识别准确率可超过98%。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        投资回报周期（ROI）通常是多久？
+                        <span class="icon-plus">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>通过减少废品率、降低人工成本和提高设备稼动率，大部分智能装备项目在12-24个月内即可收回投资成本。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-col">
+                <div class="logo" style="color:white; margin-bottom: 20px;">
+                    <span style="color:white;">WoodTech</span> 智造
+                </div>
+                <p style="color:#bbb; font-size:0.9rem; line-height:1.6;">
+                    致力于为木业企业提供最先进的智能装备应用技术，推动传统制造业向数字化、智能化转型。
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>快速链接</h4>
+                <ul>
+                    <li><a href="#applications">应用场景</a></li>
+                    <li><a href="#tech-solutions">技术方案</a></li>
+                    <li><a href="#process">实施流程</a></li>
+                    <li><a href="#faq">常见问题</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>联系方式</h4>
+                <ul>
+                    <li>电话：400-123-4567</li>
+                    <li>邮箱：contact@woodtech-example.com</li>
+                    <li>地址：中国某省某市智能制造产业园A座</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 木业智能装备应用技术服务中心. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Accordion Logic
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    // Close other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+
+            // Smooth Scroll for Anchor Links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80, // Offset for sticky header
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+  </html>
